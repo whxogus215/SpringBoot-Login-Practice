@@ -2,6 +2,6 @@
 스프링부트 시큐리티 기반 회원가입 서비스 연습 저장소
 
 ## 구현 내용
-스프링 부트에 **세션 방식의 스프링 시큐리티를 적용하고 인증/인가를 구현**하는 연습을 한다.
+스프링 부트에 **JWT 방식의 스프링 시큐리티를 적용하고 인증/인가를 구현**하는 연습을 한다.
 
-> 자료 출처 : https://www.youtube.com/watch?v=qnDdx8XdKwY&list=PLJkjrxxiBSFCKD9TRKDYn7IE96K2u3C3U&index=2
+> 자료 출처 : https://www.youtube.com/watch?v=NPRh2v7PTZg
