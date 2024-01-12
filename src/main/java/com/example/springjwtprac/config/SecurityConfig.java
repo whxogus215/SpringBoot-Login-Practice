@@ -31,6 +31,7 @@ public class SecurityConfig {
          * 3. 왜 JWT 방식에서는 세션이 stateless이어야 하는가
          * 4. 빌더 패턴
          * 5. 스프링 필터
+         * 6. 빈 등록 관련 내용 복습 및 정리
          */
         http
                 .csrf((auth) -> auth.disable());
