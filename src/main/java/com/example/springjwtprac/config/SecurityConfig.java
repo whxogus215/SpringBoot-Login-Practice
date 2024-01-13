@@ -1,12 +1,16 @@
 package com.example.springjwtprac.config;
 
+import com.example.springjwtprac.jwt.LoginFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -16,6 +20,19 @@ public class SecurityConfig {
      * 비밀번호 해쉬 암호화를 위한 인코더 빈 등록
      * 1. 해당 인코더를 사용하지 않았을 경우, 생기는 문제점은?
      */
+
+    private final AuthenticationConfiguration authenticationConfiguration;
+
+    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration) {
+        this.authenticationConfiguration = authenticationConfiguration;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration)
+            throws Exception {
+        return configuration.getAuthenticationManager();
+    }
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
@@ -49,6 +66,10 @@ public class SecurityConfig {
                         .requestMatchers("/login", "/", "/join").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated());
+
+        http
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration)),
+                        UsernamePasswordAuthenticationFilter.class);
 
         // http 세션 설정 - JWT 방식에서는 stateless 상태로 설정해야 함!
         http
