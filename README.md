@@ -19,6 +19,9 @@ https://www.youtube.com/watch?v=3Ff7UHGG3t8 댓글 참고**
 5. 스프링 시큐리티 필터 동작 원리
 6. 빈 등록 관련 내용 복습 및 정리
 7. 로그인 인증 전달 시 토큰을 사용해야 하는 이유(`UsernamePasswordAuthenticationToken`)
+8. `UserDetailsSerivice` 인터페이스의 역할 및 기능
+9. `UserDetails`의 역할(DTO) 및 기능
+10. JWT 암호화 방식 - `HS256`
 
 ### 스프링 원리
 1. `HttpServletRequest`, `HttpServletResponse` 객체 복습 및 정리
