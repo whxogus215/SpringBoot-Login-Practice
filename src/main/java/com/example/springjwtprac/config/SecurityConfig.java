@@ -1,5 +1,6 @@
 package com.example.springjwtprac.config;
 
+import com.example.springjwtprac.jwt.JWTUtil;
 import com.example.springjwtprac.jwt.LoginFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,9 +23,11 @@ public class SecurityConfig {
      */
 
     private final AuthenticationConfiguration authenticationConfiguration;
+    private final JWTUtil jwtUtil; // 이미 @Componenet로 등록되어 스프링에서 관리하는 빈 객체임
 
-    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration) {
+    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration, JWTUtil jwtUtil) {
         this.authenticationConfiguration = authenticationConfiguration;
+        this.jwtUtil = jwtUtil;
     }
 
     @Bean
@@ -68,7 +71,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated());
 
         http
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration)),
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil),
                         UsernamePasswordAuthenticationFilter.class);
 
         // http 세션 설정 - JWT 방식에서는 stateless 상태로 설정해야 함!
