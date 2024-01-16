@@ -22,6 +22,8 @@ https://www.youtube.com/watch?v=3Ff7UHGG3t8 댓글 참고**
 8. `UserDetailsSerivice` 인터페이스의 역할 및 기능
 9. `UserDetails`의 역할(DTO) 및 기능
 10. JWT 암호화 방식 - `HS256`
+11. `SecurityContextHolder` - 세션관리
+12. JWT 세션 동작 방식
 
 ### 스프링 원리
 1. `HttpServletRequest`, `HttpServletResponse` 객체 복습 및 정리
