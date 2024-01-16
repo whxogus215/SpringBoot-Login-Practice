@@ -1,5 +1,6 @@
 package com.example.springjwtprac.config;
 
+import com.example.springjwtprac.jwt.JWTFilter;
 import com.example.springjwtprac.jwt.JWTUtil;
 import com.example.springjwtprac.jwt.LoginFilter;
 import org.springframework.context.annotation.Bean;
@@ -69,6 +70,10 @@ public class SecurityConfig {
                         .requestMatchers("/login", "/", "/join").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated());
+        
+        // JWT 필터는 로그인 필터보다 앞에서 동작함
+        http
+                .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
 
         http
                 .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil),
